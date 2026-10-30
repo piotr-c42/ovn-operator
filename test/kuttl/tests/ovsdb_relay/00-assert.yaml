@@ -1,0 +1,59 @@
+#
+# Check for:
+#
+# - 1 OVNDBCluster CR (ovndbcluster-sb-sample) ready
+# - 1 OVSDBRelay CR with 2 ready replicas
+# - StatefulSet with 2 ready Pods
+# - headless, per-pod and PDB resources
+#
+apiVersion: ovn.openstack.org/v1beta1
+kind: OVNDBCluster
+metadata:
+  name: ovndbcluster-sb-sample
+spec:
+  dbType: SB
+status:
+  readyCount: 1
+---
+apiVersion: ovn.openstack.org/v1beta1
+kind: OVSDBRelay
+metadata:
+  name: ovn-sb-relay-az1
+spec:
+  replicas: 2
+status:
+  readyCount: 2
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ovn-sb-relay-az1
+spec:
+  podManagementPolicy: Parallel
+  replicas: 2
+status:
+  readyReplicas: 2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ovn-sb-relay-az1-headless
+spec:
+  clusterIP: None
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ovn-sb-relay-az1-0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ovn-sb-relay-az1-1
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ovn-sb-relay-az1
+spec:
+  maxUnavailable: 1

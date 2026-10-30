@@ -1,0 +1,8 @@
+apiVersion: ovn.openstack.org/v1beta1
+kind: OVSDBRelay
+metadata:
+  name: ovn-sb-relay-az1
+spec:
+  dbType: SB
+  replicas: 2
+  logLevel: info
