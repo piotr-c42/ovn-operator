@@ -108,6 +108,7 @@ rules:
   - ovncontrollers
   - ovndbclusters
   - ovnnorthds
+  - ovsdbrelays
   verbs:
   - create
   - delete
@@ -122,6 +123,7 @@ rules:
   - ovncontrollers/finalizers
   - ovndbclusters/finalizers
   - ovnnorthds/finalizers
+  - ovsdbrelays/finalizers
   verbs:
   - patch
   - update
@@ -130,6 +132,7 @@ rules:
   resources:
   - ovncontrollers/status
   - ovnnorthds/status
+  - ovsdbrelays/status
   verbs:
   - get
   - patch

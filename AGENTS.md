@@ -33,6 +33,7 @@ clusters), **OVN Controller** (per-node agent managing local OVS flows),
 | `OVNNorthd` | Manages the OVN Northd deployment (logical-to-physical flow translation). |
 | `OVNDBCluster` | Manages OVN database clusters (northbound and southbound OVSDB). |
 | `OVNController` | Manages the OVN Controller, OVS, and metrics daemonsets. |
+| `OVSDBRelay` | Manages stateless OVSDB relay groups between the OVN SB cluster and ovn-controller fleets. |
 
 The CRs have defaulting and validating admission webhooks.
 
@@ -43,16 +44,17 @@ their purpose changes, update this table to match.
 
 | Directory | Contents |
 |-----------|----------|
-| `api/v1beta1/` | CRD types (`ovnnorthd_types.go`, `ovndbcluster_types.go`, `ovncontroller_types.go`), conditions, webhook markers |
+| `api/v1beta1/` | CRD types (`ovnnorthd_types.go`, `ovndbcluster_types.go`, `ovncontroller_types.go`, `ovsdb_relay_types.go`), conditions, webhook markers |
 | `api/test/` | Test helpers (`TestHelper`) for use by other operators' tests |
 | `cmd/` | `main.go` entry point |
-| `internal/controller/` | Reconcilers: `ovnnorthd_controller.go`, `ovndbcluster_controller.go`, `ovncontroller_controller.go` |
+| `internal/controller/` | Reconcilers: `ovnnorthd_controller.go`, `ovndbcluster_controller.go`, `ovncontroller_controller.go`, `ovsdb_relay_controller.go` |
 | `internal/ovnnorthd/` | OVNNorthd resource builders |
 | `internal/ovndbcluster/` | OVNDBCluster resource builders |
+| `internal/ovsdbrelay/` | OVSDBRelay resource builders |
 | `internal/ovncontroller/` | OVNController resource builders |
 | `internal/common/` | Shared helper functions |
 | `internal/webhook/` | Webhook implementation |
-| `templates/` | Config files and scripts mounted into pods via `OPERATOR_TEMPLATES` env var. Subdirs: `ovncontroller/`, `ovndbcluster/`, `ovnnorthd/` |
+| `templates/` | Config files and scripts mounted into pods via `OPERATOR_TEMPLATES` env var. Subdirs: `ovncontroller/`, `ovndbcluster/`, `ovnnorthd/`, `ovsdb_relay/` |
 | `config/crd,rbac,manager,webhook/` | Generated Kubernetes manifests (CRDs, RBAC, deployment, webhooks) |
 | `config/samples/` | Example CRs (Kustomize overlays). Includes NAD (NetworkAttachmentDefinition) samples. |
 | `test/functional/` | envtest-based Ginkgo/Gomega tests |

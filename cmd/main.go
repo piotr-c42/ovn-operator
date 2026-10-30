@@ -286,6 +286,14 @@ func main() {
 		setupLog.Error(err, "unable to create controller", "controller", "OVNController")
 		os.Exit(1)
 	}
+	if err := (&controller.OVSDBRelayReconciler{
+		Client:  mgr.GetClient(),
+		Scheme:  mgr.GetScheme(),
+		Kclient: kclient,
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "OVSDBRelay")
+		os.Exit(1)
+	}
 
 	// Acquire environmental defaults and initialize operator defaults with them
 	ovnv1.SetupDefaults()
@@ -303,6 +311,10 @@ func main() {
 		}
 		if err := webhookv1beta1.SetupOVNControllerWebhookWithManager(mgr); err != nil {
 			setupLog.Error(err, "unable to create webhook", "webhook", "OVNController")
+			os.Exit(1)
+		}
+		if err := webhookv1beta1.SetupOVSDBRelayWebhookWithManager(mgr); err != nil {
+			setupLog.Error(err, "unable to create webhook", "webhook", "OVSDBRelay")
 			os.Exit(1)
 		}
 		checker = mgr.GetWebhookServer().StartedChecker()
