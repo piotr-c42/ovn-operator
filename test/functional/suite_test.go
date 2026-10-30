@@ -226,6 +226,9 @@ var _ = BeforeSuite(func() {
 	err = webhooksv1.SetupOVNControllerWebhookWithManager(k8sManager)
 	Expect(err).NotTo(HaveOccurred())
 
+	err = webhooksv1.SetupOVSDBRelayWebhookWithManager(k8sManager)
+	Expect(err).NotTo(HaveOccurred())
+
 	go func() {
 		defer GinkgoRecover()
 		err = k8sManager.Start(ctx)
