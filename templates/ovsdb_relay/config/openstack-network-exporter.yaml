@@ -1,0 +1,6 @@
+ovsdb-relay-rundir: /run/ovn
+collectors: ['ovnrelay']
+metric-sets: ['base', 'perf']
+{{- if .TLS }}
+web-config: /etc/config/web-config.yaml
+{{- end }}
