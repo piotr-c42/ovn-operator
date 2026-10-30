@@ -23,6 +23,11 @@ trap cleanup EXIT
 
 
 for crd in config/crd/bases/*.yaml; do
+    # A CRD that does not exist on the base ref is new, so there is no
+    # existing schema to check backward compatibility against.
+    if ! git cat-file -e "$BASE_REF:$crd" 2>/dev/null; then
+        continue
+    fi
     mkdir -p "$(dirname "$TMP_DIR/$crd")"
     git show "$BASE_REF:$crd" > "$TMP_DIR/$crd"
     $CHECKER check-manifests \
