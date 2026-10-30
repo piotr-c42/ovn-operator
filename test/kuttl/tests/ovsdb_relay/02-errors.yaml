@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ovn-sb-relay-az1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ovn-sb-relay-az1-headless
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ovn-sb-relay-az1-0
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ovn-sb-relay-az1

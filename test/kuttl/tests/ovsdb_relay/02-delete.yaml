@@ -1,0 +1,30 @@
+apiVersion: kuttl.dev/v1beta1
+kind: TestStep
+delete:
+- apiVersion: ovn.openstack.org/v1beta1
+  kind: OVSDBRelay
+  name: ovn-sb-relay-az1
+- apiVersion: ovn.openstack.org/v1beta1
+  kind: OVNDBCluster
+  name: ovndbcluster-nb-sample
+- apiVersion: ovn.openstack.org/v1beta1
+  kind: OVNDBCluster
+  name: ovndbcluster-sb-sample
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  name: ovndbcluster-nb-sample-etc-ovn-ovsdbserver-nb-0
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  name: ovndbcluster-nb-sample-etc-ovn-ovsdbserver-nb-1
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  name: ovndbcluster-nb-sample-etc-ovn-ovsdbserver-nb-2
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  name: ovndbcluster-sb-sample-etc-ovn-ovsdbserver-sb-0
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  name: ovndbcluster-sb-sample-etc-ovn-ovsdbserver-sb-1
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  name: ovndbcluster-sb-sample-etc-ovn-ovsdbserver-sb-2
