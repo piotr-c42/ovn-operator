@@ -45,4 +45,12 @@ func SetupDefaults() {
 	}
 
 	SetupOVNControllerDefaults(ovnControllerDefaults)
+
+	// Acquire environmental defaults and initialize OVSDBRelay defaults with them
+	ovsdbRelayDefaults := OVSDBRelayDefaults{
+		ContainerImageURL: util.GetEnvVar("RELATED_IMAGE_OVN_SB_DBCLUSTER_IMAGE_URL_DEFAULT", OVSDBRelayContainerImage),
+		ExporterImageURL:  util.GetEnvVar("RELATED_IMAGE_OPENSTACK_NETWORK_EXPORTER_IMAGE_URL_DEFAULT", OpenstackNetworkExporterImage),
+	}
+
+	SetupOVSDBRelayDefaults(ovsdbRelayDefaults)
 }
