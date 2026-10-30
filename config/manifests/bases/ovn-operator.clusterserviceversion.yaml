@@ -45,6 +45,15 @@ spec:
         displayName: TLS
         path: tls
       version: v1beta1
+    - description: OVSDBRelay is the Schema for the ovsdbrelays API
+      displayName: OVSDBRelay
+      kind: OVSDBRelay
+      name: ovsdbrelays.ovn.openstack.org
+      specDescriptors:
+      - description: TLS - Parameters related to TLS
+        displayName: TLS
+        path: tls
+      version: v1beta1
   description: OVN Operator
   displayName: OVN Operator
   install:

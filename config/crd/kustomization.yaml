@@ -5,6 +5,7 @@ resources:
 - bases/ovn.openstack.org_ovnnorthds.yaml
 - bases/ovn.openstack.org_ovndbclusters.yaml
 - bases/ovn.openstack.org_ovncontrollers.yaml
+- bases/ovn.openstack.org_ovsdbrelays.yaml
 # +kubebuilder:scaffold:crdkustomizeresource
 
 patches:

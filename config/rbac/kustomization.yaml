@@ -31,3 +31,6 @@ resources:
 - ovnnorthd_admin_role.yaml
 - ovnnorthd_editor_role.yaml
 - ovnnorthd_viewer_role.yaml
+- ovsdbrelay_admin_role.yaml
+- ovsdbrelay_editor_role.yaml
+- ovsdbrelay_viewer_role.yaml
